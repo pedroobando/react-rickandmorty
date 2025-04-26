@@ -1,3 +1,4 @@
+import { sleep } from '@/helpers';
 import { rickandmortyApi } from '@/rickandmorty/api/rickandmorty.api';
 import { ICharacter, ICharacterList } from '@/rickandmorty/interfaces/character.interface';
 // import { githubApi } from '../../api/github.api';
