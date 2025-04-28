@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router';
 import { SelectStatus, useSelectStatus } from '../components/SelectStatus';
 import { SelectGenders, useSelectGender } from '@/rickandmorty/components/SelectGenders';
 import { SelectSpecies, useSelectSpecies } from '@/rickandmorty/components/SelectSpecies';
-import { usePaginationParam } from '@/components/pagination';
+
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
@@ -28,10 +28,15 @@ export const CharactersPage: FC = () => {
     species: searchParams.get('species') || undefined,
   });
 
-  const { onPageChange } = usePaginationParam({
-    totalPages: Number(totPages) || 1,
-    setSearchParams,
-  });
+  const onPageChange = (page: number) => {
+    if (page < 1 || page > totPages!) return;
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set('page', `${!page ? 1 : page}`);
+      // setActivePage(Number(newParams.get('page')) || 1);
+      return newParams;
+    });
+  };
 
   return (
     <section className="px-4 py-2">
