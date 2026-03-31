@@ -24,13 +24,13 @@ import {
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData extends { id: number }, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   onClickRemoves: (idLists: number[]) => void;
 }
 
-export function DataTable<TData, TValue>({ columns, data, onClickRemoves }: DataTableProps<TData, TValue>) {
+export function DataTable<TData extends { id: number }, TValue>({ columns, data, onClickRemoves }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data,
